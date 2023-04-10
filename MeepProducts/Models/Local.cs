@@ -1,7 +1,13 @@
-﻿namespace MeepProducts.Models
+﻿using System.Collections.ObjectModel;
+
+namespace MeepProducts.Models
 {
     public class Local
     {
+        public Local()
+        {
+            Portais = new Collection<Portal>();
+        }
         public int Id { get; set; }
         public string Cidade { get; set; }
         public string Estado { get; set; }
