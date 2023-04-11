@@ -7,7 +7,8 @@ namespace MeepProducts.Interfaces
         ICollection<Local> GetLocals();
         Local GetLocal(int id);
         Local GetLocal(string name);
-        bool LocalAtivo(int id);
+        bool LocalExists(int id);
+        bool ExistsByName(string name);
 
     }
 }

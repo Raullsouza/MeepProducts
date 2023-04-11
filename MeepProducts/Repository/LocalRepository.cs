@@ -20,7 +20,7 @@ namespace MeepProducts.Repository
 
         public Local GetLocal(string name)
         {
-            throw new NotImplementedException();
+            return _context.Locais.Where(p => p.Cidade == name).FirstOrDefault();
         }
 
         public ICollection<Local> GetLocals()
@@ -28,9 +28,14 @@ namespace MeepProducts.Repository
             return _context.Locais.OrderBy(p => p.Id).ToList();
         }
 
-        public bool LocalAtivo(int id)
+        public bool LocalExists(int id)
         {
-            throw new NotImplementedException();
+            return _context.Locais.Any(p => p.Id == id);
+        }
+
+        public bool ExistsByName(string name)
+        {
+            return _context.Locais.Any(p => p.Cidade == name);
         }
     }
 }

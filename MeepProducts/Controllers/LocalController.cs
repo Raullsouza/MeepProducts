@@ -11,9 +11,9 @@ namespace MeepProducts.Controllers
     {
         private readonly ILocalRepository _localRepository;
 
-        public LocalController(ILocalRepository localRepository1)
+        public LocalController(ILocalRepository localRepository)
         {
-           _localRepository = localRepository1;
+           _localRepository = localRepository;
         }
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Local>))]
@@ -26,5 +26,32 @@ namespace MeepProducts.Controllers
 
             return Ok(locais);
         }
+        [HttpGet("{id}")]
+        [ProducesResponseType(200, Type = typeof(Local))]
+        [ProducesResponseType(400)]
+        public IActionResult GetLocal(int id)
+        {
+            if(!_localRepository.LocalExists(id))
+                return NotFound();
+
+            var local = _localRepository.GetLocal(id);
+
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(local);
+        }
+
+        [HttpGet("[action]/{cidade}")]
+        [ProducesResponseType(200, Type = typeof(Local))]
+        [ProducesResponseType(400)]
+        public IActionResult GetLocal(string cidade)
+        {
+            if(!_localRepository.ExistsByName(cidade))
+                return NotFound();
+            var local = _localRepository.GetLocal(cidade);
+                return Ok(local);  
+        }
+
     }
 }
