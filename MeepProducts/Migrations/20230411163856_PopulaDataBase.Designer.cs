@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeepProducts.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230411140618_PopulandoBanco")]
-    partial class PopulandoBanco
+    [Migration("20230411163856_PopulaDataBase")]
+    partial class PopulaDataBase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
