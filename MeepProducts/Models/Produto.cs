@@ -10,7 +10,5 @@ namespace MeepProducts.Models
         public int Preco { get; set; }
         public DateTime DataCriacao { get; set; }
         public int CategoriaId { get; set; }
-        public Portal Portal { get; set; }
-        public Categoria Categoria { get; set; }
     }
 }

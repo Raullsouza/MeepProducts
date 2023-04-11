@@ -109,17 +109,12 @@ namespace MeepProducts.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PortalId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Preco")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoriaId");
-
-                    b.HasIndex("PortalId");
 
                     b.ToTable("Produtos");
                 });
@@ -148,21 +143,11 @@ namespace MeepProducts.Migrations
 
             modelBuilder.Entity("MeepProducts.Models.Produto", b =>
                 {
-                    b.HasOne("MeepProducts.Models.Categoria", "Categoria")
+                    b.HasOne("MeepProducts.Models.Categoria", null)
                         .WithMany("Produtos")
                         .HasForeignKey("CategoriaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("MeepProducts.Models.Portal", "Portal")
-                        .WithMany()
-                        .HasForeignKey("PortalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Categoria");
-
-                    b.Navigation("Portal");
                 });
 
             modelBuilder.Entity("MeepProducts.Models.Categoria", b =>

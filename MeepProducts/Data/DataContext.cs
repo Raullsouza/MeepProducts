@@ -13,5 +13,6 @@ namespace MeepProducts.Data
         public DbSet<Portal> Portais { get; set; }
         public DbSet<Produto> Produtos { get; set; }
 
+    
     }
 }
