@@ -85,3 +85,5 @@ C:\Users\raul.souza\Documents\Projetos\MeepProducts\MeepProducts\obj\Debug\net6.
 C:\Users\raul.souza\Documents\Projetos\MeepProducts\MeepProducts\obj\Debug\net6.0\MeepProducts.pdb
 C:\Users\raul.souza\Documents\Projetos\MeepProducts\MeepProducts\obj\Debug\net6.0\MeepProducts.genruntimeconfig.cache
 C:\Users\raul.souza\Documents\Projetos\MeepProducts\MeepProducts\obj\Debug\net6.0\ref\MeepProducts.dll
+C:\Users\raul.souza\Documents\Projetos\MeepProducts\MeepProducts\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\raul.souza\Documents\Projetos\MeepProducts\MeepProducts\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
