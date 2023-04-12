@@ -67,7 +67,9 @@ namespace MeepProducts.Controllers
 
         public IActionResult GetPortalsByLocal(int localId) 
         { 
-            var portais = _mapper.Map<List<PortalDto>>(_localRepository.GetPortalsByLocal(localId));
+            var portais = _mapper.Map<List<PortalDto>>
+                (_localRepository.GetPortalsByLocal(localId));
+
             if(!ModelState.IsValid)
                 return BadRequest(ModelState);
 

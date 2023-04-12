@@ -16,6 +16,10 @@ namespace MeepProducts.Repository
         {
             return _context.Categorias.Any(c => c.Id == id);
         }
+        public bool ExistsByName(string name)
+        {
+            return _context.Categorias.Any(c => c.Nome == name);
+        }
 
         public ICollection<Categoria> GetCategorias()
         {
@@ -26,10 +30,16 @@ namespace MeepProducts.Repository
         {
             return _context.Categorias.Where(c => c.Id == id).FirstOrDefault();
         }
+        public Categoria GetCategoria(string nome)
+        {
+            return _context.Categorias.Where(c => c.Nome == nome).FirstOrDefault();
+        }
 
         public ICollection<Produto> GetProdutosByCategoria(int categoriaId)
         {
             return _context.Produtos.Where(p => p.CategoriaId == categoriaId).ToList();
         }
+
+    
     }
 }

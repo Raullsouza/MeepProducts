@@ -7,6 +7,5 @@ namespace MeepProducts.Dto
         public int Id { get; set; }
         public int PortalId { get; set; }
         public string Nome { get; set; }
-        public Portal Portal { get; set; }
     }
 }

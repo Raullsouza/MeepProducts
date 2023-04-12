@@ -34,7 +34,7 @@ namespace MeepProducts.Controllers
             return Ok(categorias);
         }
 
-        [HttpGet("{categoryId}")]
+        [HttpGet("ById/{categoryId}")]
         [ProducesResponseType(200, Type = typeof(Categoria))]
         [ProducesResponseType(400)]
         public IActionResult GetCategoria(int categoryId)
@@ -51,8 +51,25 @@ namespace MeepProducts.Controllers
             return Ok(categoria);
         }
 
+        [HttpGet("ByName/{nomeCategoria}")]
+        [ProducesResponseType(200, Type = typeof(Categoria))]
+        [ProducesResponseType(400)]
+        public IActionResult GetCategoria(string nomeCategoria)
+        {
+            if (!_categoriaRepository.ExistsByName(nomeCategoria))
+                return NotFound();
 
-        [HttpGet("produto/{categoriaId}")]
+            var categoria = _mapper.Map<CategoriaDto>
+                (_categoriaRepository.GetCategoria(nomeCategoria));
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(categoria);
+        }
+
+
+        [HttpGet("produtoByCategoria/{categoriaId}")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Produto>))]
         [ProducesResponseType(400)]
 
