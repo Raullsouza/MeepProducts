@@ -16,6 +16,7 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 builder.Services.AddScoped<ILocalRepository, LocalRepository>();
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<IPortalRepository, PortalRepository>();
+builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 
 
 builder.Services.AddEndpointsApiExplorer();

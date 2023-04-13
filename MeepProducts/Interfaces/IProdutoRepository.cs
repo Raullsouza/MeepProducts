@@ -5,8 +5,11 @@ namespace MeepProducts.Interfaces
     public interface IProdutoRepository
     {
         ICollection<Produto> GetProdutos();
-        Produto GetProduto(int id);
-        Produto GetProduto(string nome);
+        Produto GetProdutoById(int id);
+        Produto GetProdutoByName(string nome);
+        ICollection<Produto> GetProdutosByCategoria(int categoriaId);
         bool ProdutoExists(int prodId);
+        bool ProdutoExistsByName(string nome);
+        bool CategoriaExists(int categoriaId);
     }
 }

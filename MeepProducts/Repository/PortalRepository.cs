@@ -31,5 +31,15 @@ namespace MeepProducts.Repository
         {
             return _context.Portais.Any(p => p.Id == id);
         }
+
+        public Portal GetPortalByName(string name)
+        {
+            return _context.Portais.Where(p => p.Nome == name).FirstOrDefault();
+        }
+
+        public bool PortalExistsByName(string name)
+        {
+            return _context.Portais.Any(p => p.Nome == name);
+        }
     }
 }

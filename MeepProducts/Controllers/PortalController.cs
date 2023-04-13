@@ -49,6 +49,22 @@ namespace MeepProducts.Controllers
             return Ok(portal);
         }
 
+        [HttpGet("ByName/{portalName}")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Portal>))]
+        [ProducesResponseType(400)]
+
+        public IActionResult GetPortalByName(string portalName)
+        {
+            if (!_portalRepository.PortalExistsByName(portalName))
+                return NotFound();
+            var portal = _mapper.Map<PortalDto>(_portalRepository.GetPortalByName(portalName));
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(portal);
+        }
+
         [HttpGet("CategoriaByPortalId/{portalId}")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Categoria>))]
         [ProducesResponseType(400)]

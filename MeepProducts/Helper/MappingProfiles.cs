@@ -12,7 +12,7 @@ namespace MeepProducts.Helper
             CreateMap<Categoria, CategoriaDto>();
             CreateMap<Produto, ProdutoDto>();
             CreateMap<Portal, PortalDto>();
-
+            CreateMap<Produto, CategoriaDto>();
         }
     }
 }
