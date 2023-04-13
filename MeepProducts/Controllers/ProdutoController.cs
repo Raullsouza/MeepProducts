@@ -79,5 +79,38 @@ namespace MeepProducts.Controllers
 
             return Ok(Produtos);
         }
+
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+
+        public IActionResult CreateProduto([FromBody] ProdutoDto produtoCreate)
+        {
+            if(produtoCreate == null)
+                return BadRequest(ModelState);
+
+            var produto = _produtoRepository.GetProdutos()
+                .Where(p => p.Nome.Trim().ToUpper() == produtoCreate.Nome.TrimEnd().ToUpper())
+                .FirstOrDefault();
+
+            if (produto != null)
+            {
+                ModelState.AddModelError("", "Produto já existe");
+                return StatusCode(422, ModelState);
+            }
+            if(!ModelState.IsValid) return BadRequest();
+
+                var produtoMap = _mapper.Map<Produto>(produtoCreate);
+
+            if(!_produtoRepository.CreateProduto(produtoMap))
+                {
+                    ModelState.AddModelError("", "Ocorreu um erro ao salvar");
+                    return StatusCode(500, ModelState);
+                }
+
+                return Ok("Produto cadastrado");
+
+            
+        }
     }
 }

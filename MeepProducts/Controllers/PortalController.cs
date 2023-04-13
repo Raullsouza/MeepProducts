@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿ using AutoMapper;
 using MeepProducts.Dto;
 using MeepProducts.Interfaces;
 using MeepProducts.Models;
@@ -82,5 +82,6 @@ namespace MeepProducts.Controllers
             return Ok(portal);
 
         }
+
     }
 }

@@ -13,6 +13,8 @@ namespace MeepProducts.Helper
             CreateMap<Produto, ProdutoDto>();
             CreateMap<Portal, PortalDto>();
             CreateMap<Produto, CategoriaDto>();
+            CreateMap<CategoriaDto, Categoria>();
+            CreateMap<ProdutoDto, Produto>();
         }
     }
 }

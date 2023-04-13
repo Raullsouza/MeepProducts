@@ -83,5 +83,35 @@ namespace MeepProducts.Controllers
 
             return Ok(produtos);
         }
+
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateCategoria([FromBody] CategoriaDto categoriaCreate)
+        {
+            if (categoriaCreate == null)
+                return BadRequest(ModelState);
+
+            var categoria = _categoriaRepository.GetCategorias()
+                .Where(c => c.Nome.Trim().ToUpper() == categoriaCreate.Nome.TrimEnd().ToUpper())
+                .FirstOrDefault();
+            if (categoria != null) 
+            {
+                ModelState.AddModelError("", "Categoria já existe!");
+                return StatusCode(422, ModelState);
+            }
+            if (!ModelState.IsValid) 
+                return BadRequest(ModelState);
+
+            var categoriaMap = _mapper.Map<Categoria>(categoriaCreate);
+            
+            if(!_categoriaRepository.CreateCategoria(categoriaMap))
+            {
+                ModelState.AddModelError("", "Algo deu errado ao salvar");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Categoria criada!");
+        }
     }
 }

@@ -61,6 +61,7 @@ namespace MeepProducts.Controllers
             return Ok(local);  
 
         }
+        /*
         [HttpGet("portais/{localId}")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Portal>))]
         [ProducesResponseType(400)]
@@ -75,5 +76,6 @@ namespace MeepProducts.Controllers
 
             return Ok(portais);
         }
+        */
     }
 }

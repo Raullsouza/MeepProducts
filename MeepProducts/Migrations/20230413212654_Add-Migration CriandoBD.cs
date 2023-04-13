@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MeepProducts.Migrations
 {
     /// <inheritdoc />
-    public partial class PopulaDataBase : Migration
+    public partial class AddMigrationCriandoBD : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,33 +15,33 @@ namespace MeepProducts.Migrations
                 name: "Locais",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    LocalId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Cidade = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Estado = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Locais", x => x.Id);
+                    table.PrimaryKey("PK_Locais", x => x.LocalId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Portais",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    PortalId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LocalId = table.Column<int>(type: "int", nullable: false)
+                    LocalId = table.Column<int>(type: "int", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Portais", x => x.Id);
+                    table.PrimaryKey("PK_Portais", x => x.PortalId);
                     table.ForeignKey(
                         name: "FK_Portais_Locais_LocalId",
                         column: x => x.LocalId,
                         principalTable: "Locais",
-                        principalColumn: "Id",
+                        principalColumn: "LocalId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -49,19 +49,19 @@ namespace MeepProducts.Migrations
                 name: "Categorias",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    CategoriaId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PortalId = table.Column<int>(type: "int", nullable: false)
+                    PortalId = table.Column<int>(type: "int", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categorias", x => x.Id);
+                    table.PrimaryKey("PK_Categorias", x => x.CategoriaId);
                     table.ForeignKey(
                         name: "FK_Categorias_Portais_PortalId",
                         column: x => x.PortalId,
                         principalTable: "Portais",
-                        principalColumn: "Id",
+                        principalColumn: "PortalId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -69,7 +69,7 @@ namespace MeepProducts.Migrations
                 name: "Produtos",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ProdutoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -79,12 +79,12 @@ namespace MeepProducts.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Produtos", x => x.Id);
+                    table.PrimaryKey("PK_Produtos", x => x.ProdutoId);
                     table.ForeignKey(
                         name: "FK_Produtos_Categorias_CategoriaId",
                         column: x => x.CategoriaId,
                         principalTable: "Categorias",
-                        principalColumn: "Id",
+                        principalColumn: "CategoriaId",
                         onDelete: ReferentialAction.Cascade);
                 });
 

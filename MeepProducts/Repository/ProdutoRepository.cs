@@ -14,11 +14,11 @@ namespace MeepProducts.Repository
         }
         public ICollection<Produto> GetProdutos()
         {
-            return _context.Produtos.OrderBy(p => p.Id).ToList();
+            return _context.Produtos.OrderBy(p => p.ProdutoId).ToList();
         }
         public Produto GetProdutoById(int id)
         {
-            return _context.Produtos.Where(p => p.Id == id).FirstOrDefault();
+            return _context.Produtos.Where(p => p.ProdutoId == id).FirstOrDefault();
         }
         public Produto GetProdutoByName(string nome)
         {
@@ -27,7 +27,7 @@ namespace MeepProducts.Repository
 
         public bool ProdutoExists(int prodId)
         {
-            return _context.Produtos.Any(p => p.Id == prodId);
+            return _context.Produtos.Any(p => p.ProdutoId == prodId);
         }
 
         public bool ProdutoExistsByName(string nome)
@@ -37,12 +37,24 @@ namespace MeepProducts.Repository
 
         public bool CategoriaExists(int categoriaId)
         {
-            return _context.Categorias.Any(c => c.Id == categoriaId);
+            return _context.Categorias.Any(c => c.CategoriaId == categoriaId);
         }
 
         public ICollection<Produto> GetProdutosByCategoria(int categoriaId)
         {
-            return _context.Produtos.Where(p => p.CategoriaId == categoriaId).ToList();
+            return _context.Produtos.Where(p => p.Categoria.CategoriaId == categoriaId).ToList();
+        }
+
+        public bool CreateProduto(Produto produto)
+        {
+            _context.Add(produto);
+            return Save();
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
         }
     }
 }

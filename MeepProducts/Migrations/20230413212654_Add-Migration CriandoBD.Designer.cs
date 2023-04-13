@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeepProducts.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230411163856_PopulaDataBase")]
-    partial class PopulaDataBase
+    [Migration("20230413212654_Add-Migration CriandoBD")]
+    partial class AddMigrationCriandoBD
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,11 @@ namespace MeepProducts.Migrations
 
             modelBuilder.Entity("MeepProducts.Models.Categoria", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CategoriaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoriaId"));
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -40,7 +40,7 @@ namespace MeepProducts.Migrations
                     b.Property<int>("PortalId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("CategoriaId");
 
                     b.HasIndex("PortalId");
 
@@ -49,11 +49,11 @@ namespace MeepProducts.Migrations
 
             modelBuilder.Entity("MeepProducts.Models.Local", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("LocalId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LocalId"));
 
                     b.Property<string>("Cidade")
                         .IsRequired()
@@ -63,18 +63,18 @@ namespace MeepProducts.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("LocalId");
 
                     b.ToTable("Locais");
                 });
 
             modelBuilder.Entity("MeepProducts.Models.Portal", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("PortalId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PortalId"));
 
                     b.Property<int>("LocalId")
                         .HasColumnType("int");
@@ -83,7 +83,7 @@ namespace MeepProducts.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("PortalId");
 
                     b.HasIndex("LocalId");
 
@@ -92,11 +92,11 @@ namespace MeepProducts.Migrations
 
             modelBuilder.Entity("MeepProducts.Models.Produto", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ProdutoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProdutoId"));
 
                     b.Property<int>("CategoriaId")
                         .HasColumnType("int");
@@ -115,7 +115,7 @@ namespace MeepProducts.Migrations
                     b.Property<int>("Preco")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("ProdutoId");
 
                     b.HasIndex("CategoriaId");
 
@@ -146,11 +146,13 @@ namespace MeepProducts.Migrations
 
             modelBuilder.Entity("MeepProducts.Models.Produto", b =>
                 {
-                    b.HasOne("MeepProducts.Models.Categoria", null)
+                    b.HasOne("MeepProducts.Models.Categoria", "Categoria")
                         .WithMany("Produtos")
                         .HasForeignKey("CategoriaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Categoria");
                 });
 
             modelBuilder.Entity("MeepProducts.Models.Categoria", b =>

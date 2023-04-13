@@ -4,10 +4,9 @@ namespace MeepProducts.Models
 {
     public class Portal
     {
-        public int Id { get; set; }
-        public int LocalId { get; set; }    
-        public string Nome { get; set; }
+        public int PortalId { get; set; }
         public Local Local { get; set; }
+        public string Nome { get; set; }
         public ICollection<Categoria> Categorias { get; set; }
     }
 }

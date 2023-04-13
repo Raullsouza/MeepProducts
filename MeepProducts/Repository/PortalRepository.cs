@@ -14,22 +14,22 @@ namespace MeepProducts.Repository
         }
         public ICollection<Portal> GetPortals()
         {
-            return _context.Portais.OrderBy(c => c.Id).ToList(); 
+            return _context.Portais.OrderBy(c => c.PortalId).ToList(); 
         }
 
         public Portal GetPortalById(int id)
         {
-            return _context.Portais.Where(p => p.Id == id).FirstOrDefault();
+            return _context.Portais.Where(p => p.PortalId == id).FirstOrDefault();
         }
 
         public ICollection<Categoria> GetCategoriasByPortalId(int portalId)
         {
            return  _context.Categorias.Where(p => p.PortalId == portalId).ToList(); 
         }
-
+     
         public bool PortalExists(int id)
         {
-            return _context.Portais.Any(p => p.Id == id);
+            return _context.Portais.Any(p => p.PortalId == id);
         }
 
         public Portal GetPortalByName(string name)
