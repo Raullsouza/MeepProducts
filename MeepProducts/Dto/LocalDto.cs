@@ -4,7 +4,7 @@ namespace MeepProducts.Dto
 {
     public class LocalDto
     {
-        public int LocalId { get; set; }
+        public int Id { get; set; }
         public string Cidade { get; set; }
         public string Estado { get; set; }
     }

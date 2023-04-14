@@ -9,12 +9,14 @@ namespace MeepProducts.Helper
         public MappingProfiles()
         {
             CreateMap<Local, LocalDto>();
+            CreateMap<LocalDto, Local>();
             CreateMap<Categoria, CategoriaDto>();
             CreateMap<Produto, ProdutoDto>();
-            CreateMap<Portal, PortalDto>();
-            CreateMap<Produto, CategoriaDto>();
-            CreateMap<CategoriaDto, Categoria>();
             CreateMap<ProdutoDto, Produto>();
+            CreateMap<Portal, PortalDto>();
+            CreateMap<PortalDto, Portal>();
+            CreateMap<Produto, CategoriaDto>();
+            CreateMap<CategoriaDto, Categoria>();        
         }
     }
 }

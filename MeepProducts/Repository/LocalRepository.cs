@@ -16,7 +16,7 @@ namespace MeepProducts.Repository
 
         public Local GetLocal(int id)
         {
-            return _context.Locais.Where(p => p.LocalId == id).FirstOrDefault();
+            return _context.Locais.Where(p => p.Id == id).FirstOrDefault();
         }
 
         public Local GetLocal(string name)
@@ -26,18 +26,30 @@ namespace MeepProducts.Repository
 
         public ICollection<Local> GetLocals()
         {
-            return _context.Locais.OrderBy(p => p.LocalId).ToList();
+            return _context.Locais.OrderBy(p => p.Id).ToList();
 
         }
 
         public bool LocalExists(int id)
         {
-            return _context.Locais.Any(p => p.LocalId == id);
+            return _context.Locais.Any(p => p.Id == id);
         }
 
         public bool ExistsByName(string name)
         {
             return _context.Locais.Any(p => p.Cidade == name);
+        }
+
+        public bool createLocal(Local local)
+        {
+            _context.Add(local);
+            return save();
+        }
+
+        public bool save()
+        {
+         var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
         }
     }
 }

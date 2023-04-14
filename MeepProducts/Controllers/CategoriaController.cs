@@ -95,6 +95,7 @@ namespace MeepProducts.Controllers
             var categoria = _categoriaRepository.GetCategorias()
                 .Where(c => c.Nome.Trim().ToUpper() == categoriaCreate.Nome.TrimEnd().ToUpper())
                 .FirstOrDefault();
+
             if (categoria != null) 
             {
                 ModelState.AddModelError("", "Categoria já existe!");

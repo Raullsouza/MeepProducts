@@ -77,5 +77,37 @@ namespace MeepProducts.Controllers
             return Ok(portais);
         }
         */
+
+
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+
+        public IActionResult CreateLocal([FromBody] LocalDto  localCreate)
+        {
+            if (localCreate == null)
+                return BadRequest(ModelState);
+
+            var local = _localRepository.GetLocals()
+                .Where(p => p.Cidade.Trim().ToUpper() == localCreate.Cidade.TrimEnd().ToUpper())
+                .FirstOrDefault();
+
+            if(local != null)
+            {
+                ModelState.AddModelError("", "Local já existe");
+                return StatusCode(422, ModelState);
+            }
+
+            if(!ModelState.IsValid) return BadRequest(ModelState);
+
+            var localMap = _mapper.Map<Local>(localCreate);
+
+            if(!_localRepository.createLocal(localMap))
+            {
+                ModelState.AddModelError("", "Ocorreu um erro ao salvar");
+                    return StatusCode(500, ModelState);
+            }
+            return Ok("Local criado!");
+        }
     }
 }

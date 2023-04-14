@@ -14,22 +14,22 @@ namespace MeepProducts.Repository
         }
         public ICollection<Portal> GetPortals()
         {
-            return _context.Portais.OrderBy(c => c.PortalId).ToList(); 
+            return _context.Portais.OrderBy(c => c.Id).ToList(); 
         }
 
         public Portal GetPortalById(int id)
         {
-            return _context.Portais.Where(p => p.PortalId == id).FirstOrDefault();
+            return _context.Portais.Where(p => p.Id == id).FirstOrDefault();
         }
 
         public ICollection<Categoria> GetCategoriasByPortalId(int portalId)
         {
-           return  _context.Categorias.Where(p => p.PortalId == portalId).ToList(); 
+           return  _context.Categorias.Where(p => p.Id == portalId).ToList(); 
         }
      
         public bool PortalExists(int id)
         {
-            return _context.Portais.Any(p => p.PortalId == id);
+            return _context.Portais.Any(p => p.Id == id);
         }
 
         public Portal GetPortalByName(string name)
@@ -40,6 +40,18 @@ namespace MeepProducts.Repository
         public bool PortalExistsByName(string name)
         {
             return _context.Portais.Any(p => p.Nome == name);
+        }
+
+        public bool createPortal(Portal portal)
+        {
+            _context.Add(portal);
+            return save();
+        }
+
+        public bool save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
         }
     }
 }

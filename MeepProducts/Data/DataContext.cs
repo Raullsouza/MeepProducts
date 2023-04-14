@@ -23,7 +23,8 @@ namespace MeepProducts.Data
 
             modelBuilder.Entity<Local>()
                 .HasMany(p => p.Portais)
-                .WithOne(l => l.Local);
+                .WithOne(l => l.Local)
+                .HasForeignKey(p => p.LocalId);
 
             modelBuilder.Entity<Portal>()
                 .HasMany(c => c.Categorias)

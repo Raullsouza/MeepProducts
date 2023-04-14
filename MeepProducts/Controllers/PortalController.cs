@@ -83,5 +83,35 @@ namespace MeepProducts.Controllers
 
         }
 
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+
+        public IActionResult CreatePortal([FromBody] PortalDto portalCreate)
+        {
+            if(portalCreate == null)    
+                return BadRequest(ModelState);
+
+            var portal = _portalRepository.GetPortals()
+                .Where(p => p.Nome.Trim().ToUpper() == portalCreate.Nome.TrimEnd().ToUpper())
+                .FirstOrDefault();
+
+            if(portal == null)
+            {
+                ModelState.AddModelError("", "Portal já existe");
+                    return StatusCode(422, ModelState);
+            }
+            if(!ModelState.IsValid) return BadRequest();
+
+            var portalMap = _mapper.Map<Portal>(portalCreate);
+
+            if(!_portalRepository.createPortal(portalMap))
+            {
+                ModelState.AddModelError("", "Ocorreu um erro ao salvar");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok( "Portal Cadastrado");
+        }
     }
 }

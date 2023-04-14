@@ -14,7 +14,7 @@ namespace MeepProducts.Repository
         }
         public bool CategoriaExists(int id)
         {
-            return _context.Categorias.Any(c => c.CategoriaId == id);
+            return _context.Categorias.Any(c => c.Id == id);
         }
         public bool ExistsByName(string name)
         {
@@ -23,12 +23,12 @@ namespace MeepProducts.Repository
 
         public ICollection<Categoria> GetCategorias()
         {
-            return _context.Categorias.OrderBy(c => c.CategoriaId).ToList();
+            return _context.Categorias.OrderBy(c => c.Id).ToList();
         }
 
         public Categoria GetCategoria(int id)
         {
-            return _context.Categorias.Where(c => c.CategoriaId == id).FirstOrDefault();
+            return _context.Categorias.Where(c => c.Id == id).FirstOrDefault();
         }
         public Categoria GetCategoria(string nome)
         {
@@ -37,7 +37,7 @@ namespace MeepProducts.Repository
 
         public ICollection<Produto> GetProdutosByCategoria(int categoriaId)
         {
-            return _context.Produtos.Where(p => p.Categoria.CategoriaId == categoriaId).ToList();
+            return _context.Produtos.Where(p => p.Categoria.Id == categoriaId).ToList();
         }
 
         public bool CreateCategoria(Categoria categoria)

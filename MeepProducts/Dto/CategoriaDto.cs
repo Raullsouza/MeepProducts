@@ -4,7 +4,7 @@ namespace MeepProducts.Dto
 {
     public class CategoriaDto
     {
-        public int CategoriaId { get; set; }
+        public int Id { get; set; }
         public string Nome { get; set; }
         public int PortalId { get; set; }
     }

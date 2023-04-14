@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeepProducts.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230413212654_Add-Migration CriandoBD")]
-    partial class AddMigrationCriandoBD
+    [Migration("20230414142746_CriacaoBD")]
+    partial class CriacaoBD
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,11 @@ namespace MeepProducts.Migrations
 
             modelBuilder.Entity("MeepProducts.Models.Categoria", b =>
                 {
-                    b.Property<int>("CategoriaId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoriaId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -40,7 +40,7 @@ namespace MeepProducts.Migrations
                     b.Property<int>("PortalId")
                         .HasColumnType("int");
 
-                    b.HasKey("CategoriaId");
+                    b.HasKey("Id");
 
                     b.HasIndex("PortalId");
 
@@ -49,11 +49,11 @@ namespace MeepProducts.Migrations
 
             modelBuilder.Entity("MeepProducts.Models.Local", b =>
                 {
-                    b.Property<int>("LocalId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LocalId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Cidade")
                         .IsRequired()
@@ -63,18 +63,18 @@ namespace MeepProducts.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("LocalId");
+                    b.HasKey("Id");
 
                     b.ToTable("Locais");
                 });
 
             modelBuilder.Entity("MeepProducts.Models.Portal", b =>
                 {
-                    b.Property<int>("PortalId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PortalId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("LocalId")
                         .HasColumnType("int");
@@ -83,7 +83,7 @@ namespace MeepProducts.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PortalId");
+                    b.HasKey("Id");
 
                     b.HasIndex("LocalId");
 
@@ -92,11 +92,11 @@ namespace MeepProducts.Migrations
 
             modelBuilder.Entity("MeepProducts.Models.Produto", b =>
                 {
-                    b.Property<int>("ProdutoId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProdutoId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CategoriaId")
                         .HasColumnType("int");
@@ -115,7 +115,7 @@ namespace MeepProducts.Migrations
                     b.Property<int>("Preco")
                         .HasColumnType("int");
 
-                    b.HasKey("ProdutoId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CategoriaId");
 
