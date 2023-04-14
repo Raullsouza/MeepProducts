@@ -61,7 +61,7 @@ namespace MeepProducts.Controllers
             return Ok(local);  
 
         }
-        /*
+        
         [HttpGet("portais/{localId}")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Portal>))]
         [ProducesResponseType(400)]
@@ -69,16 +69,14 @@ namespace MeepProducts.Controllers
         public IActionResult GetPortalsByLocal(int localId) 
         { 
             var portais = _mapper.Map<List<PortalDto>>
-                (_localRepository.GetPortalsByLocal(localId));
+                (_localRepository.GetPortaisByLocal(localId));
 
             if(!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             return Ok(portais);
         }
-        */
-
-
+        
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]

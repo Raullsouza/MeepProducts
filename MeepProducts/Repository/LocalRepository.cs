@@ -29,6 +29,10 @@ namespace MeepProducts.Repository
             return _context.Locais.OrderBy(p => p.Id).ToList();
 
         }
+        public ICollection<Portal> GetPortaisByLocal(int Localid)
+        {
+            return _context.Portais.Where(p => p.LocalId == Localid).ToList();
+        }
 
         public bool LocalExists(int id)
         {
@@ -51,6 +55,8 @@ namespace MeepProducts.Repository
          var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
         }
+
+    
     }
 }
  

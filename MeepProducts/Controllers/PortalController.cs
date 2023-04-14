@@ -96,7 +96,7 @@ namespace MeepProducts.Controllers
                 .Where(p => p.Nome.Trim().ToUpper() == portalCreate.Nome.TrimEnd().ToUpper())
                 .FirstOrDefault();
 
-            if(portal == null)
+            if(portal != null)
             {
                 ModelState.AddModelError("", "Portal já existe");
                     return StatusCode(422, ModelState);
