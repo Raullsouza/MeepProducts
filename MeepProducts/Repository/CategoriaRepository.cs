@@ -45,6 +45,16 @@ namespace MeepProducts.Repository
             _context.Add(categoria);
             return Save();
         }
+        public bool UpdateCategoria(Categoria categoria)
+        {
+            _context.Update(categoria);
+            return Save();
+        }
+        public bool DeleteCategoria(Categoria categoria)
+        {
+            _context.Remove(categoria);
+            return Save();
+        }
 
         public bool Save()
         {
@@ -52,4 +62,5 @@ namespace MeepProducts.Repository
             return saved > 0 ? true : false;
         }
     }
+      
 }

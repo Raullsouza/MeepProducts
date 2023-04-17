@@ -2,6 +2,7 @@
 using MeepProducts.Dto;
 using MeepProducts.Interfaces;
 using MeepProducts.Models;
+using MeepProducts.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -114,5 +115,61 @@ namespace MeepProducts.Controllers
 
             return Ok("Categoria criada!");
         }
+
+
+        [HttpPut("{categoriaId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateCategoria(int categoriaId, [FromBody] CategoriaDto updateCategoria)
+        {
+            if(updateCategoria == null) 
+                return BadRequest(ModelState);
+
+            if(categoriaId != updateCategoria.Id)
+                return BadRequest(ModelState);
+
+            if (!_categoriaRepository.CategoriaExists(categoriaId))
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var categoriaMap = _mapper.Map<Categoria>(updateCategoria);
+
+            if(!_categoriaRepository.UpdateCategoria(categoriaMap))
+            {
+                ModelState.AddModelError("", "Ocorreu um erro ao atualizar a categoria");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Categoria Atualizada");
+        }
+
+        [HttpDelete("categoriaId")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+
+        public IActionResult DeleteCategoria(int categoriaId)
+        {
+            if (!_categoriaRepository.CategoriaExists(categoriaId))
+            {
+                return NotFound();
+            }
+
+            var categoriaToDelete = _categoriaRepository.GetCategoria(categoriaId);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_categoriaRepository.DeleteCategoria(categoriaToDelete))
+            {
+                ModelState.AddModelError("", "Ocorreu um erro ao excluir o produto");
+            }
+
+            return Ok("Categoria excluida");
+        }
+
     }
 }

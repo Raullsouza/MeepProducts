@@ -12,6 +12,8 @@ namespace MeepProducts.Interfaces
         bool ProdutoExistsByName(string nome);
         bool CategoriaExists(int categoriaId);
         bool CreateProduto(Produto produto);
+        bool UpdateProduto(Produto produto);
+        bool DeleteProduto(Produto produto);
         bool Save();
     }
 }

@@ -2,6 +2,7 @@
 using MeepProducts.Dto;
 using MeepProducts.Interfaces;
 using MeepProducts.Models;
+using MeepProducts.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -100,12 +101,65 @@ namespace MeepProducts.Controllers
 
             var localMap = _mapper.Map<Local>(localCreate);
 
-            if(!_localRepository.createLocal(localMap))
+            if(!_localRepository.CreateLocal(localMap))
             {
                 ModelState.AddModelError("", "Ocorreu um erro ao salvar");
                     return StatusCode(500, ModelState);
             }
             return Ok("Local criado!");
+        }
+
+        [HttpPut("{localId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+
+        public IActionResult UpdateLocal (int localId, [FromBody] LocalDto updateLocal )
+        {
+            if(updateLocal == null)
+                return BadRequest(ModelState);
+
+            if(localId != updateLocal.Id)
+                return BadRequest(ModelState);
+
+            if(!_localRepository.LocalExists(localId))
+                return BadRequest(ModelState);
+
+            if (!ModelState.IsValid) return BadRequest();
+
+            var localMap = _mapper.Map<Local>(updateLocal);
+
+            if (!_localRepository.UpdateLocal(localMap))
+            {
+                ModelState.AddModelError("", "Ocorreu um erro ao atualizar o Local");
+                return StatusCode(500, ModelState );
+            }
+            return Ok("Local atualizado");
+        }
+
+        [HttpDelete("LocalId")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+
+        public IActionResult DeleteLocal(int localId)
+        {
+            if (!_localRepository.LocalExists(localId))
+            {
+                return NotFound();
+            }
+
+            var localToDelete = _localRepository.GetLocal(localId);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_localRepository.DeleteLocal(localToDelete))
+            {
+                ModelState.AddModelError("", "Ocorreu um erro ao excluir o local");
+            }
+
+            return Ok("local excluido");
         }
     }
 }

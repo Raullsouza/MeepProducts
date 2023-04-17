@@ -42,16 +42,27 @@ namespace MeepProducts.Repository
             return _context.Portais.Any(p => p.Nome == name);
         }
 
-        public bool createPortal(Portal portal)
+        public bool CreatePortal(Portal portal)
         {
             _context.Add(portal);
-            return save();
+            return Save();
         }
-
-        public bool save()
+        public bool UpdatePortal(Portal portal)
+        {
+            _context.Update(portal);
+            return Save();
+        }
+        public bool DeletePortal(Portal portal)
+        {
+            _context.Remove(portal);
+            return Save();
+        }
+        public bool Save()
         {
             var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
         }
+
+      
     }
 }

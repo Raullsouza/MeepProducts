@@ -10,7 +10,9 @@ namespace MeepProducts.Interfaces
         ICollection<Portal> GetPortaisByLocal(int Localid);
         bool LocalExists(int id);
         bool ExistsByName(string name);
-        bool createLocal(Local local);
-        bool save();
+        bool CreateLocal(Local local);
+        bool UpdateLocal(Local local);  
+        bool DeleteLocal(Local local);
+        bool Save();
     }
 }

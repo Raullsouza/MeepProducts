@@ -108,9 +108,58 @@ namespace MeepProducts.Controllers
                     return StatusCode(500, ModelState);
                 }
 
-                return Ok("Produto cadastrado");
+                return Ok("Produto cadastrado");        
+        }
+        [HttpPut("{produtoId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateProduto (int produtoId, [FromBody] ProdutoDto updateProduto)
+        {
+            if (updateProduto == null)
+                return BadRequest(ModelState);
 
-            
+            if(produtoId != updateProduto.Id)
+                return BadRequest(ModelState);
+
+            if(!_produtoRepository.ProdutoExists(produtoId))
+                return NotFound();
+
+            if(!ModelState.IsValid) return BadRequest();
+
+            var produtoMap = _mapper.Map<Produto>(updateProduto);
+
+            if (!_produtoRepository.UpdateProduto(produtoMap))
+            {
+                ModelState.AddModelError("", "Algo deu errado ao atualizar o produto.");
+                    return StatusCode(500, ModelState);
+            }
+            return Ok("Produto Atualizado");
+        }
+
+        [HttpDelete("produtoId")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+
+        public IActionResult DeleteProduto(int produtoId) 
+        {
+            if (!_produtoRepository.ProdutoExists(produtoId))
+            {
+                return NotFound();
+            }
+
+            var produtoToDelete = _produtoRepository.GetProdutoById(produtoId);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if(!_produtoRepository.DeleteProduto(produtoToDelete))
+            {
+                ModelState.AddModelError("", "Ocorreu um erro ao excluir o produto");
+            }
+
+            return Ok("Produto excluido");
         }
     }
 }

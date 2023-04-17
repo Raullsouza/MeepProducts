@@ -10,7 +10,9 @@ namespace MeepProducts.Interfaces
         ICollection<Categoria> GetCategoriasByPortalId(int portalId);
         bool PortalExists(int id);
         bool PortalExistsByName(string name);
-        bool createPortal (Portal portal);
-        bool save();
+        bool CreatePortal (Portal portal);
+        bool UpdatePortal (Portal portal); 
+        bool DeletePortal (Portal portal);
+        bool Save();
     }
 }

@@ -50,11 +50,23 @@ namespace MeepProducts.Repository
             _context.Add(produto);
             return Save();
         }
+        public bool UpdateProduto(Produto produto)
+        {
+            _context.Update(produto);
+            return Save();
+        }
+        public bool DeleteProduto(Produto produto)
+        {
+           _context.Remove(produto);
+            return Save();
+        }
 
         public bool Save()
         {
             var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
         }
+
+    
     }
 }

@@ -44,19 +44,29 @@ namespace MeepProducts.Repository
             return _context.Locais.Any(p => p.Cidade == name);
         }
 
-        public bool createLocal(Local local)
+        public bool CreateLocal(Local local)
         {
             _context.Add(local);
-            return save();
+            return Save();
         }
 
-        public bool save()
+        public bool UpdateLocal(Local local)
+        {
+            _context.Update(local);
+            return Save();
+        }
+        public bool DeleteLocal(Local local)
+        {
+            _context.Remove(local);
+            return Save();
+        }
+        public bool Save()
         {
          var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
         }
 
-    
+     
     }
 }
  

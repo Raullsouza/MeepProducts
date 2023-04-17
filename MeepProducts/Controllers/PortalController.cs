@@ -105,13 +105,67 @@ namespace MeepProducts.Controllers
 
             var portalMap = _mapper.Map<Portal>(portalCreate);
 
-            if(!_portalRepository.createPortal(portalMap))
+            if(!_portalRepository.CreatePortal(portalMap))
             {
                 ModelState.AddModelError("", "Ocorreu um erro ao salvar");
                 return StatusCode(500, ModelState);
             }
 
             return Ok( "Portal Cadastrado");
+        }
+
+        [HttpPut("{portalId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+
+        public IActionResult UpdatePortal(int portalID, [FromBody] PortalDto updatePortal)
+        {
+            if(updatePortal == null)
+                return BadRequest(ModelState);
+
+            if (portalID != updatePortal.Id)
+                return BadRequest(ModelState);
+
+            if(!_portalRepository.PortalExists(portalID))
+                return NotFound();
+
+            if(!ModelState.IsValid) return BadRequest();
+
+            var portalMap = _mapper.Map<Portal>(updatePortal);
+
+            if(!_portalRepository.UpdatePortal(portalMap))
+            {
+                ModelState.AddModelError("", "Ocorreu um erro ao atualizar o portal");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Portal Atualizado");
+        }
+
+        [HttpDelete("portalId")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+
+        public IActionResult DeletePortal(int portalId)
+        {
+            if (!_portalRepository.PortalExists(portalId))
+            {
+                return NotFound();
+            }
+
+            var portalToDelete = _portalRepository.GetPortalById(portalId);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_portalRepository.DeletePortal(portalToDelete))
+            {
+                ModelState.AddModelError("", "Ocorreu um erro ao excluir o portal");
+            }
+
+            return Ok("Portal excluido");
         }
     }
 }
