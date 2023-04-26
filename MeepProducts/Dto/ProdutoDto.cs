@@ -8,7 +8,7 @@ namespace MeepProducts.Dto
         public int CategoriaId { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
-        public int Preco { get; set; }
+        public decimal Preco { get; set; }
         public DateTime DataCriacao { get; set; }
 
     }

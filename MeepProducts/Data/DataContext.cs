@@ -1,9 +1,11 @@
-﻿using MeepProducts.Models;
+﻿ using MeepProducts.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeepProducts.Data
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
@@ -30,6 +32,13 @@ namespace MeepProducts.Data
                 .HasMany(c => c.Categorias)
                 .WithOne(p => p.Portal)
                 .HasForeignKey(p => p.PortalId);
+
+            modelBuilder.Entity<IdentityUserLogin<string>>()
+                .HasNoKey();
+            modelBuilder.Entity<IdentityUserRole<string>>()
+                .HasNoKey();
+            modelBuilder.Entity<IdentityUserToken<string>>()
+                .HasNoKey();
         }
     }
  }

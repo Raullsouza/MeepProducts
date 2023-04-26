@@ -30,7 +30,7 @@ namespace MeepProducts
                                         Nome = "Bebidas",
                                         Produtos = new List<Produto>()
                                         {
-                                            new Produto { Nome = "Água", Descricao = "Sem Gás" , DataCriacao = DateTime.Now, Preco = 1000},
+                                            new Produto { Nome = "Água", Descricao = "Sem Gás" , DataCriacao = DateTime.Now, Preco = 10},
                                             new Produto { Nome = "Água", Descricao = "Com Gás", DataCriacao = DateTime.Now, Preco = 100 },
                                             new Produto { Nome = "Hamburguer", Descricao = "Frango", DataCriacao = DateTime.Now, Preco = 500},
                                             new Produto { Nome = "Pizza", Descricao = "Calabresa", DataCriacao = DateTime.Now, Preco = 17},
