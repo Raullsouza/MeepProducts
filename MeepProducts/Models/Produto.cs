@@ -15,6 +15,7 @@ namespace MeepProducts.Models
         [Column(TypeName = "decimal(8,2)")]
        
         public decimal Preco { get; set; }
+        public int ncp { get; set; }
 
         public DateTime DataCriacao { get; set; }
         public Categoria Categoria { get; set; }   
